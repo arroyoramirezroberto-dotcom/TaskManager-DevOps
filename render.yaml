@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: taskmanager-devops
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    healthCheckPath: /health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.7
+      - key: DATABASE_PATH
+        value: /var/data/tasks.db
+    disk:
+      name: taskmanager-data
+      mountPath: /var/data
+      sizeGB: 1
