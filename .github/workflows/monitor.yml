@@ -1,0 +1,26 @@
+name: Monitor de disponibilidad
+on:
+  schedule:
+    - cron: "17 */6 * * *"
+  workflow_dispatch:
+jobs:
+  salud:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verificar endpoint de salud
+        run: |
+          python - <<'PY'
+          import json
+          import time
+          import urllib.request
+          url = "https://taskmanager-devops-arroyo.onrender.com/health"
+          started = time.monotonic()
+          # El servicio gratuito puede tardar en despertar.
+          with urllib.request.urlopen(url, timeout=120) as response:
+              status = response.status
+              body = json.load(response)
+          elapsed = round((time.monotonic() - started) * 1000)
+          print(f"HTTP {status} | tiempo {elapsed} ms | respuesta {body}")
+          if status != 200 or body.get("status") != "ok":
+              raise SystemExit("Health check fallido")
+          PY
