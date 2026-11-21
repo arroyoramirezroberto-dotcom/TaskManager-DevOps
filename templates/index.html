@@ -1,0 +1,12 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TaskManager | TechSolutions</title><link rel="stylesheet" href="/static/css/style.css"></head>
+<body><main><header><div><p class="eyebrow">TECHSOLUTIONS</p><h1>TaskManager</h1><p>Organiza, prioriza y da seguimiento a tus actividades.</p></div><span class="tag">DevOps · v1</span></header>
+<section class="panel"><h2 id="form-title">Nueva tarea</h2><form id="task-form"><input type="hidden" id="task-id">
+<label>Nombre <input id="nombre" required maxlength="150" placeholder="Ej. Preparar entrega"></label>
+<label>Descripción <textarea id="descripcion" placeholder="Detalles de la actividad"></textarea></label>
+<div class="fields"><label>Estado <select id="estado"><option>Pendiente</option><option>En proceso</option><option>Terminada</option></select></label>
+<label>Prioridad <select id="prioridad"><option>Media</option><option>Alta</option><option>Baja</option></select></label></div>
+<div class="actions"><button type="submit">Guardar tarea</button><button type="button" id="cancel" class="secondary" hidden>Cancelar edición</button></div></form><p id="message" role="status"></p></section>
+<section><div class="list-heading"><h2>Mis tareas</h2><span id="counter"></span></div><div id="tasks" class="task-list"></div></section></main>
+<script src="/static/js/app.js"></script></body></html>
